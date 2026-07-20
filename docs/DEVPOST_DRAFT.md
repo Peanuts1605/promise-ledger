@@ -31,6 +31,8 @@ The public repository contains:
 - live CockroachDB Cloud tables for commitment records, immutable events, and scoped memory;
 - a Node repository layer that refuses to fake persistence when `DATABASE_URL` is absent;
 - a deterministic policy shared by the local API and deployment-ready AWS Lambda handler;
+- a read-only public Lambda surface for health, record, and decision proof; owner reassignment is intentionally not exposed without a real authenticated operator route;
+- structured Lambda request metadata and response IDs that make public-safe replay traceable without logging customer content;
 - a guarded public-safe demo seed covering all three meaningful decisions;
 - a GitHub Actions gate that runs lint, production build, policy tests, schema verification, and seed verification on every push.
 

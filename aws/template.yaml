@@ -33,11 +33,6 @@ Resources:
           Properties:
             Path: /api/promises/{externalKey}
             Method: GET
-        PromiseOwner:
-          Type: HttpApi
-          Properties:
-            Path: /api/promises/{externalKey}/owner
-            Method: POST
         PromiseDecision:
           Type: HttpApi
           Properties:

@@ -11,6 +11,7 @@
 | Are CockroachDB contest integrations real? | `ccloud` authenticated cluster inspection plus read-only Managed MCP schema/table/query inspection | Live proof passed |
 | Are at least two CockroachDB tools meaningfully identified? | Managed MCP inspects cluster-scoped durable state; `ccloud` inspects the live cluster and fixture replay | Live proof passed |
 | Is the source public and open-source? | Public GitHub repository with detected MIT license, setup instructions, public-safe seed, and verification workflow | Live proof passed |
+| Is the public service safe and observable? | AWS surface permits health and read-only proof routes only; owner reassignment returns `405`, and every Lambda response carries a request ID | Local/SAM proof passed; live replay pending |
 | Is the required AWS application service real? | AWS Lambda HTTP API | Pending AWS account authentication and deployment |
 | Is the demo safe to review publicly? | Invented fixture and guarded seed command | Local proof passed |
 

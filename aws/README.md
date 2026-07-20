@@ -29,5 +29,10 @@ three public-safe facts without printing the database URL:
 2. `PL-DEMO-001` can be read with its immutable event trail.
 3. `PL-DEMO-003` returns `PREPARE_REVIEW_DRAFT` from the deployed decision route.
 
+The deployed HTTP API intentionally exposes only health and read-only proof
+routes. Owner reassignment stays out of the public deployment until it has a
+real authenticated operator surface. Lambda adds a request ID to every response
+and logs structured request metadata without recording customer content.
+
 Record the endpoint and verification output before claiming the AWS integration
 is live.

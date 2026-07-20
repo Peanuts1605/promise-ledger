@@ -37,10 +37,19 @@ test('the decision route is distinct from the generic promise read route', () =>
 test('Lambda reports missing persistent memory configuration instead of faking a store', async () => {
   const original = process.env.DATABASE_URL;
   delete process.env.DATABASE_URL;
-  const result = await handler({ rawPath: '/health', requestContext: { http: { method: 'GET' } } });
+  const result = await handler({ rawPath: '/health', requestContext: { requestId: 'health-proof', http: { method: 'GET' } } });
   if (original) process.env.DATABASE_URL = original;
   assert.equal(result.statusCode, 503);
-  assert.deepEqual(JSON.parse(result.body), { status: 'configuration_required', missing: 'DATABASE_URL' });
+  assert.deepEqual(JSON.parse(result.body), { status: 'configuration_required', missing: 'DATABASE_URL', requestId: 'health-proof' });
+});
+
+test('Lambda keeps owner reassignment off the public HTTP surface', async () => {
+  const result = await handler({
+    rawPath: '/api/promises/PL-DEMO-001/owner',
+    requestContext: { requestId: 'write-proof', http: { method: 'POST' } },
+  });
+  assert.equal(result.statusCode, 405);
+  assert.deepEqual(JSON.parse(result.body), { error: 'public_write_not_enabled', requestId: 'write-proof' });
 });
 
 test('the agent asks for ownership before preparing any follow-up', () => {

@@ -4,7 +4,7 @@ Promise Ledger treats a promise as an accountable record, not a chat summary. Th
 
 ```mermaid
 flowchart LR
-  UI["React proof interface\npublic-safe fixture"] --> API["AWS Lambda + HTTP API\ndeployment-ready, not yet live"]
+  UI["React proof interface\npublic-safe fixture"] --> API["AWS Lambda + HTTP API\nread-only proof routes, deployment-ready"]
   API --> Policy["Decision policy\nowner + scoped memory"]
   Policy --> Store["CockroachDB Cloud\nlive persistent store"]
   Store --> Records["promise_records\ncommitment + owner + state"]
@@ -23,3 +23,11 @@ flowchart LR
 | Owner and matching scope | `PREPARE_REVIEW_DRAFT` | A review-only draft may be prepared. It is never sent automatically. |
 
 The CockroachDB Cloud cluster, schema replay, and read-only MCP inspection are verified with public-safe fixture data. The AWS application-service path stays explicitly deployment-ready, not live, until a Lambda endpoint and evidence replay are verified together.
+
+## Public deployment boundary
+
+The AWS HTTP API exposes health, record reads, and decision reads only. It does
+not accept public owner reassignment. Each Lambda response includes a request ID
+and produces structured request metadata for debugging without logging customer
+content. This keeps the contest proof publicly reviewable while reserving state
+changes for a future authenticated operator surface.
