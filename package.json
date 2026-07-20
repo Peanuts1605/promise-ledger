@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "api": "node server/index.mjs",
     "db:verify-schema": "node scripts/verify-schema.mjs",
+    "db:verify-demo-seed": "node scripts/verify-demo-seed.mjs",
+    "db:seed-demo": "node server/seed-demo.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

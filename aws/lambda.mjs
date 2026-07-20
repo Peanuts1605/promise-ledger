@@ -1,5 +1,6 @@
 import { createPromiseRepository } from '../server/repository.mjs';
 import { decideNextMove } from '../server/agent.mjs';
+import { parsePromiseRoute } from '../server/routes.mjs';
 
 let repository;
 
@@ -38,13 +39,18 @@ export async function handler(event) {
   }
   if (!activeRepository) return response(503, { error: 'DATABASE_URL_REQUIRED' });
 
-  const match = path.match(/^\/api\/promises\/([^/]+)(?:\/(owner|decision))?$/);
-  if (!match) return response(404, { error: 'not_found' });
-  const externalKey = decodeURIComponent(match[1]);
-  const action = match[2];
+  const route = parsePromiseRoute(path);
+  if (!route) return response(404, { error: 'not_found' });
+  const { externalKey, action } = route;
 
   try {
-    if (method === 'GET') {
+    if (method === 'GET' && action === 'decision') {
+      const promise = await activeRepository.getPromise(externalKey);
+      if (!promise) return response(404, { error: 'PROMISE_NOT_FOUND' });
+      const matchingMemory = await activeRepository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key });
+      return response(200, { promiseKey: externalKey, recommendation: decideNextMove({ promise, matchingMemory }) });
+    }
+    if (method === 'GET' && action === 'read') {
       const promise = await activeRepository.getPromise(externalKey);
       if (!promise) return response(404, { error: 'PROMISE_NOT_FOUND' });
       const [events, memory] = await Promise.all([
@@ -52,12 +58,6 @@ export async function handler(event) {
         activeRepository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key }),
       ]);
       return response(200, { promise, events, memory });
-    }
-    if (method === 'GET' && action === 'decision') {
-      const promise = await activeRepository.getPromise(externalKey);
-      if (!promise) return response(404, { error: 'PROMISE_NOT_FOUND' });
-      const matchingMemory = await activeRepository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key });
-      return response(200, { promiseKey: externalKey, recommendation: decideNextMove({ promise, matchingMemory }) });
     }
     if (method === 'POST' && action === 'owner') {
       const body = event.body ? JSON.parse(event.body) : {};

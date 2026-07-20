@@ -1,0 +1,69 @@
+{
+  "promises": [
+    {
+      "id": "10000000-0000-4000-8000-000000000001",
+      "externalKey": "PL-DEMO-001",
+      "customerKey": "cedar-table",
+      "projectKey": "private-dining",
+      "commitment": "Send the revised private dining seating plan before the Friday walkthrough.",
+      "sourceReference": "public-safe-demo:cedar-table-brief",
+      "ownerName": null,
+      "ownerConfirmedAt": null,
+      "dueAt": "2026-08-14T16:00:00.000Z",
+      "state": "owner_required"
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000002",
+      "externalKey": "PL-DEMO-002",
+      "customerKey": "mariner-house",
+      "projectKey": "terrace-refresh",
+      "commitment": "Confirm the weather contingency before the terrace refresh site visit.",
+      "sourceReference": "public-safe-demo:mariner-house-brief",
+      "ownerName": "Jordan Kim",
+      "ownerConfirmedAt": "2026-08-12T15:10:00.000Z",
+      "dueAt": "2026-08-16T14:00:00.000Z",
+      "state": "owner_confirmed"
+    },
+    {
+      "id": "10000000-0000-4000-8000-000000000003",
+      "externalKey": "PL-DEMO-003",
+      "customerKey": "northstar-studio",
+      "projectKey": "gallery-opening",
+      "commitment": "Prepare a review-only opening-night arrival note for the gallery team.",
+      "sourceReference": "public-safe-demo:northstar-brief",
+      "ownerName": "Jordan Kim",
+      "ownerConfirmedAt": "2026-08-12T15:25:00.000Z",
+      "dueAt": "2026-08-17T18:00:00.000Z",
+      "state": "owner_confirmed"
+    }
+  ],
+  "memories": [
+    {
+      "id": "20000000-0000-4000-8000-000000000001",
+      "customerKey": "cedar-table",
+      "projectKey": "private-dining",
+      "sourceReference": "public-safe-demo:cedar-table-policy",
+      "excerpt": "Private dining walkthroughs use a revised seating plan and an owner-confirmed arrival contact.",
+      "eligibility": "matched",
+      "recordedAt": "2026-08-11T14:00:00.000Z"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000002",
+      "customerKey": "mariner-house",
+      "projectKey": "lobby-refresh",
+      "sourceReference": "public-safe-demo:mariner-house-lobby-note",
+      "excerpt": "Lobby deliveries arrive through the north service entrance after 10:00 AM.",
+      "eligibility": "matched",
+      "recordedAt": "2026-08-11T14:30:00.000Z"
+    },
+    {
+      "id": "20000000-0000-4000-8000-000000000003",
+      "customerKey": "northstar-studio",
+      "projectKey": "gallery-opening",
+      "sourceReference": "public-safe-demo:northstar-arrival-note",
+      "excerpt": "Opening-night arrivals are reviewed by the gallery operations owner before any guest-facing note is sent.",
+      "eligibility": "matched",
+      "recordedAt": "2026-08-11T15:00:00.000Z"
+    }
+  ]
+}

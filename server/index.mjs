@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { decideNextMove } from './agent.mjs';
 import { createPromiseRepository } from './repository.mjs';
+import { parsePromiseRoute } from './routes.mjs';
 
 const port = Number(process.env.PORT || 8787);
 const databaseUrl = process.env.DATABASE_URL;
@@ -34,13 +35,18 @@ const server = createServer(async (request, response) => {
   }
   if (!repository) return send(response, 503, { error: 'DATABASE_URL_REQUIRED' });
 
-  const match = request.url?.match(/^\/api\/promises\/([^/]+)(?:\/(owner|decision))?$/);
-  if (!match) return send(response, 404, { error: 'not_found' });
-  const externalKey = decodeURIComponent(match[1]);
-  const action = match[2];
+  const route = parsePromiseRoute(request.url);
+  if (!route) return send(response, 404, { error: 'not_found' });
+  const { externalKey, action } = route;
 
   try {
-    if (request.method === 'GET') {
+    if (request.method === 'GET' && action === 'decision') {
+      const promise = await repository.getPromise(externalKey);
+      if (!promise) return send(response, 404, { error: 'PROMISE_NOT_FOUND' });
+      const matchingMemory = await repository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key });
+      return send(response, 200, { promiseKey: externalKey, recommendation: decideNextMove({ promise, matchingMemory }) });
+    }
+    if (request.method === 'GET' && action === 'read') {
       const promise = await repository.getPromise(externalKey);
       if (!promise) return send(response, 404, { error: 'PROMISE_NOT_FOUND' });
       const [events, memory] = await Promise.all([
@@ -48,12 +54,6 @@ const server = createServer(async (request, response) => {
         repository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key }),
       ]);
       return send(response, 200, { promise, events, memory });
-    }
-    if (request.method === 'GET' && action === 'decision') {
-      const promise = await repository.getPromise(externalKey);
-      if (!promise) return send(response, 404, { error: 'PROMISE_NOT_FOUND' });
-      const matchingMemory = await repository.getScopedMemory({ customerKey: promise.customer_key, projectKey: promise.project_key });
-      return send(response, 200, { promiseKey: externalKey, recommendation: decideNextMove({ promise, matchingMemory }) });
     }
     if (request.method === 'POST' && action === 'owner') {
       const body = await readJson(request);

@@ -17,6 +17,8 @@ The agent policy is intentionally legible: `ASSIGN_OWNER`, `HOLD_FOR_CONTEXT`, o
 
 The current build uses public-safe fixture data. It does **not** yet claim a live CockroachDB or AWS integration.
 
+The intended record flow and the exact boundary between verified local proof and planned cloud integration are shown in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
 ## Persistent-memory contract
 
 The next layer is already defined in [`server/README.md`](server/README.md): a CockroachDB-ready schema for the commitment record, its ordered decision trail, and customer-plus-project-scoped memory. The server refuses to pretend persistence exists when `DATABASE_URL` is not configured.
@@ -37,4 +39,13 @@ npm run lint
 npm run build
 npm test
 npm run db:verify-schema
+npm run db:verify-demo-seed
 ```
+
+Once a CockroachDB Cloud connection has been verified, the public-safe fixture can be loaded explicitly with:
+
+```bash
+ALLOW_PUBLIC_SAFE_SEED=true npm run db:seed-demo
+```
+
+See [`docs/PUBLIC_SAFE_DEMO_DATA.md`](docs/PUBLIC_SAFE_DEMO_DATA.md) for the three demo cases and their expected decisions.
