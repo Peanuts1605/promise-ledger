@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Promise Ledger public-safe demo API on AWS Lambda.
+
+Parameters:
+  DatabaseUrl:
+    Type: String
+    NoEcho: true
+    Description: CockroachDB Cloud connection URL supplied only at deploy time.
+
+Resources:
+  PromiseLedgerApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ../
+      Handler: aws/lambda.handler
+      Runtime: nodejs22.x
+      Architectures:
+        - arm64
+      MemorySize: 256
+      Timeout: 10
+      Environment:
+        Variables:
+          DATABASE_URL: !Ref DatabaseUrl
+      Events:
+        Health:
+          Type: HttpApi
+          Properties:
+            Path: /health
+            Method: GET
+        PromiseRead:
+          Type: HttpApi
+          Properties:
+            Path: /api/promises/{externalKey}
+            Method: GET
+        PromiseOwner:
+          Type: HttpApi
+          Properties:
+            Path: /api/promises/{externalKey}/owner
+            Method: POST
+
+Outputs:
+  PromiseLedgerApiUrl:
+    Description: HTTP API endpoint for the Promise Ledger demo.
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
