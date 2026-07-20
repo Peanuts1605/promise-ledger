@@ -2,7 +2,7 @@
 
 Receipt ID: PL-20260720-PLATFORM-ROUTE
 Date: 2026-07-20
-Status: local route passed; cloud authentication in progress
+Status: shared local route passed; cloud authentication in progress
 
 ## Artifact
 
@@ -30,9 +30,9 @@ Use ccloud CLI and the CockroachDB Cloud Managed MCP Server as the two required 
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-PLATFORM-ROUTE/`
+- Notion pointer: https://app.notion.com/p/3a3b143d291781fea691fd299fb783d2
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
