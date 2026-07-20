@@ -36,9 +36,9 @@ The workflow proves source, UI build, schema shape, and deterministic agent poli
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-PUBLIC-VERIFICATION/`
+- Notion pointer: https://app.notion.com/p/3a3b143d2917818eb668fb763e279810
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
