@@ -41,9 +41,9 @@ Mobile flow passed at a 390px viewport:
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-INTERACTION-REPAIR/`
+- Notion pointer: https://app.notion.com/p/3a3b143d291781caa5dafddce440c433
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
