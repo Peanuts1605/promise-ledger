@@ -20,6 +20,8 @@ The local repository, SQL schema, Lambda handler, and SAM template keep the appl
 - `ALLOW_PUBLIC_SAFE_SEED=true npm run db:seed-demo` created three invented promise records, five ordered events, and three scoped-memory rows.
 - `npm run db:verify-live-demo` verified all three expected decisions against the live database: `ASSIGN_OWNER`, `HOLD_FOR_CONTEXT`, and `PREPARE_REVIEW_DRAFT`.
 - The Managed MCP Server completed an authenticated read-only session. Its cluster-scoped configuration rejected an extra `cluster_id` argument, `list_tables` returned the three live proof tables, and a read-only query returned the three public-safe fixture keys. No write MCP tool was used.
+- AWS CLI `2.36.2` and SAM CLI `1.163.0` are installed locally. `sam validate --lint` and `sam build` pass for `aws/template.yaml` in `us-east-1`.
+- `aws sts get-caller-identity` confirms that no deployment identity is configured yet. Authentication, not tooling or template validity, is the remaining AWS gate.
 - The local persistent-memory schema, repository, Lambda handler, and deployment template continue to pass local checks.
 
 ## Why this is a meaningful memory layer
