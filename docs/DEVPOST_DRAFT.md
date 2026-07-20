@@ -43,6 +43,8 @@ CockroachDB is the durable memory layer because promises need transactional owne
 ## Proof links
 
 - Repository: https://github.com/Peanuts1605/promise-ledger
+- Live demo: https://peanuts1605.github.io/promise-ledger/
+- Public demo deployment: https://github.com/Peanuts1605/promise-ledger/actions/runs/29748354143
 - Public verification workflow: https://github.com/Peanuts1605/promise-ledger/actions/runs/29742789794
 - Architecture: https://github.com/Peanuts1605/promise-ledger/blob/main/docs/ARCHITECTURE.md
 - Live CockroachDB and MCP receipt: https://github.com/Peanuts1605/promise-ledger/blob/main/docs/receipts/PROMISE_LEDGER_LIVE_COCKROACH_MCP_PROOF_RECEIPT_2026-07-20.md

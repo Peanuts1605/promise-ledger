@@ -4,6 +4,12 @@ Promise Ledger is a public-safe product proof for a simple operations idea: usef
 
 Licensed under [MIT](LICENSE).
 
+## Live demo
+
+Public-safe interactive demo: https://peanuts1605.github.io/promise-ledger/
+
+The Pages deployment contains invented fixture data only. It demonstrates the owner-first decision journey without exposing a database connection or claiming the pending AWS Lambda/API deployment.
+
 ## The proof slice
 
 1. A customer commitment is captured with its source.
