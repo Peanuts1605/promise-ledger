@@ -45,9 +45,9 @@ No live CockroachDB schema, fixture replay, Managed MCP inspection, or AWS Lambd
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-LIVE-REPLAY-READY/`
+- Notion pointer: https://app.notion.com/p/3a3b143d2917816e82f1d1aa9c012552
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
