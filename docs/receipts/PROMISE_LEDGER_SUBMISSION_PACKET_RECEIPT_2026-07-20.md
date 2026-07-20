@@ -28,9 +28,9 @@ The packet separates already-verified local proof from remaining live contest in
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-SUBMISSION-PACKET/`
+- Notion pointer: https://app.notion.com/p/3a3b143d2917817fb057c1e771876da9
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
