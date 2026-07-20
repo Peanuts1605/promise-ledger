@@ -9,6 +9,8 @@
 | Can a judge use the product without local setup? | Public-safe GitHub Pages demo at https://peanuts1605.github.io/promise-ledger/ | Live deployment passed |
 | Is the implementation reproducible? | Public repo plus GitHub Actions workflow | Public workflow passed |
 | Are CockroachDB contest integrations real? | `ccloud` authenticated cluster inspection plus read-only Managed MCP schema/table/query inspection | Live proof passed |
+| Are at least two CockroachDB tools meaningfully identified? | Managed MCP inspects cluster-scoped durable state; `ccloud` inspects the live cluster and fixture replay | Live proof passed |
+| Is the source public and open-source? | Public GitHub repository with detected MIT license, setup instructions, public-safe seed, and verification workflow | Live proof passed |
 | Is the required AWS application service real? | AWS Lambda HTTP API | Pending AWS account authentication and deployment |
 | Is the demo safe to review publicly? | Invented fixture and guarded seed command | Local proof passed |
 

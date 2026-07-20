@@ -34,11 +34,16 @@ The public repository contains:
 - a guarded public-safe demo seed covering all three meaningful decisions;
 - a GitHub Actions gate that runs lint, production build, policy tests, schema verification, and seed verification on every push.
 
-The live evidence already includes the official `ccloud` CLI inspecting the CockroachDB Cloud cluster and the CockroachDB Cloud Managed MCP Server performing a read-only table/query inspection of the public-safe fixture. AWS Lambda plus HTTP API are ready in the repository and remain the final deployment proof before submission.
+The CockroachDB tools are deliberate, not decorative:
+
+- **CockroachDB Cloud Managed MCP Server:** the agent uses the cluster-scoped, read-only connection to inspect the durable promise tables and public-safe fixture without treating chat history as truth. The proof rejects an attempted extra `cluster_id`, keeping the inspection scoped to the intended cluster.
+- **`ccloud` CLI:** the agent uses CockroachDB's agent-ready CLI to inspect the live cluster and verify the public-safe fixture replay against the same persistent memory layer.
+
+AWS Lambda plus HTTP API are ready in the repository and remain the final deployment proof before submission. Lambda will serve the small record-and-decision API path; it is not claimed as live until the deployed endpoint is replayed against the public-safe fixture.
 
 ## Why CockroachDB and AWS
 
-CockroachDB is the durable memory layer because promises need transactional ownership changes and an ordered decision record, not a loose transcript. Customer-plus-project scope limits what the agent may retrieve. AWS Lambda keeps the public API surface small and reviewable.
+CockroachDB is the durable memory layer because promises need transactional ownership changes and an ordered decision record, not a loose transcript. Customer-plus-project scope limits what the agent may retrieve. CockroachDB Managed MCP gives the agent a controlled way to inspect that durable source of truth, while `ccloud` verifies the real cluster behind the fixture. AWS Lambda keeps the public API surface small and reviewable.
 
 ## Proof links
 
@@ -55,6 +60,8 @@ CockroachDB is the durable memory layer because promises need transactional owne
 - [x] `server/schema.sql` applied to the cluster.
 - [x] Public-safe fixture replayed against the live cluster.
 - [x] Read-only CockroachDB Managed MCP inspection captured.
+- [x] Two required CockroachDB tools are identified with their proof roles: Managed MCP Server and `ccloud` CLI.
+- [x] MIT license is detected in the public repository.
 - [ ] AWS Lambda `/health`, record read, decision read, and owner assignment verified.
 - [ ] Public sub-three-minute demo video captures the working integration.
 - [ ] Devpost fields, terms, and eligibility complete.
