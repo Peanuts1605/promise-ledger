@@ -54,6 +54,10 @@ Official references:
 
 AWS Console has no authenticated account or local deployment profile on this machine. The next smallest patch is to authenticate an AWS account with Lambda, API Gateway, and CloudFormation/SAM deployment access; then deploy `aws/template.yaml`, verify `/health` plus one public-safe API transaction, and add that proof to the demo video.
 
+## Transfer rule
+
+Claim each contest requirement at its own evidence level. A live database and read-only MCP pass can strengthen the product without satisfying the AWS application-service rubric; target the unproven rubric row next instead of adding features around it.
+
 ## Validation
 
 - `npm test`: passed, 10 tests
