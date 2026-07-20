@@ -38,6 +38,11 @@ Resources:
           Properties:
             Path: /api/promises/{externalKey}/owner
             Method: POST
+        PromiseDecision:
+          Type: HttpApi
+          Properties:
+            Path: /api/promises/{externalKey}/decision
+            Method: GET
 
 Outputs:
   PromiseLedgerApiUrl:

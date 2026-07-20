@@ -10,6 +10,8 @@ This directory is the real persistence contract for Promise Ledger.
 
 The repository deliberately requires `DATABASE_URL`; it does not silently replace a missing CockroachDB connection with fake persistent storage.
 
+`agent.mjs` is the operational decision policy: it asks for ownership first, holds when scoped context is absent, and only allows a reviewable draft when both an owner and matched memory exist.
+
 ## Local checks
 
 ```bash

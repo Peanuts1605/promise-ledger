@@ -51,6 +51,11 @@ function App() {
   const status = owner ? 'OWNER CONFIRMED' : 'OWNER REQUIRED'
   const dueLabel = owner ? 'Due Wednesday, 11:00 AM' : 'Awaiting an accountable owner'
   const progress = useMemo(() => (owner ? (draftReady ? 100 : 66) : 33), [owner, draftReady])
+  const recommendation = !owner
+    ? { label: 'ASSIGN OWNER', detail: 'Name one accountable person before any follow-up is prepared.' }
+    : draftReady
+      ? { label: 'REVIEW DRAFT', detail: 'Jordan has a scoped draft to review. It has not been sent.' }
+      : { label: 'PREPARE REVIEW DRAFT', detail: 'Ownership and matching context are present.' }
 
   function appendEvent(event: Omit<LedgerEvent, 'id'>) {
     setEvents((current) => [...current, { ...event, id: current.length + 1 }])
@@ -130,6 +135,7 @@ function App() {
             <strong>{dueLabel}</strong>
             <div className="progress-track" aria-label={`${progress}% promise readiness`}><span style={{ width: `${progress}%` }}></span></div>
             <p>{owner ? 'One person owns the next customer-facing decision.' : 'No accountable person is attached to the commitment yet.'}</p>
+            <div className="recommendation"><strong>Agent recommendation: {recommendation.label}</strong><span>{recommendation.detail}</span></div>
           </aside>
         </div>
       </section>

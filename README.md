@@ -13,6 +13,8 @@ Licensed under [MIT](LICENSE).
 5. Only matching customer context can prepare a reviewable follow-up.
 6. Nothing is automatically sent.
 
+The agent policy is intentionally legible: `ASSIGN_OWNER`, `HOLD_FOR_CONTEXT`, or `PREPARE_REVIEW_DRAFT`. It avoids the common failure mode where an agent turns a vague commitment into a confident customer message without a named owner or grounded context.
+
 The current build uses public-safe fixture data. It does **not** yet claim a live CockroachDB or AWS integration.
 
 ## Persistent-memory contract

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { nextSequence, normalizeOwnerName, promiseScope } from '../server/validation.mjs';
 import { handler } from '../aws/lambda.mjs';
+import { decideNextMove } from '../server/agent.mjs';
 
 test('normalizes a real owner name', () => {
   assert.equal(normalizeOwnerName('  Jordan   Kim '), 'Jordan Kim');
@@ -31,4 +32,29 @@ test('Lambda reports missing persistent memory configuration instead of faking a
   if (original) process.env.DATABASE_URL = original;
   assert.equal(result.statusCode, 503);
   assert.deepEqual(JSON.parse(result.body), { status: 'configuration_required', missing: 'DATABASE_URL' });
+});
+
+test('the agent asks for ownership before preparing any follow-up', () => {
+  assert.deepEqual(
+    decideNextMove({ promise: { owner_name: null, state: 'owner_required' }, matchingMemory: [{ id: 'memory-1' }] }),
+    {
+      decision: 'ASSIGN_OWNER',
+      rationale: 'A customer commitment cannot advance until one accountable person is named.',
+      safeToDraft: false,
+    },
+  );
+});
+
+test('the agent holds when scoped customer context is unavailable', () => {
+  assert.equal(
+    decideNextMove({ promise: { owner_name: 'Jordan Kim', state: 'owner_confirmed' }, matchingMemory: [] }).decision,
+    'HOLD_FOR_CONTEXT',
+  );
+});
+
+test('the agent prepares review-only work when owner and context both exist', () => {
+  assert.equal(
+    decideNextMove({ promise: { owner_name: 'Jordan Kim', state: 'owner_confirmed' }, matchingMemory: [{ id: 'memory-1' }] }).decision,
+    'PREPARE_REVIEW_DRAFT',
+  );
 });
