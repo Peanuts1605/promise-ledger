@@ -28,13 +28,13 @@ The point is not to preserve every chat. It is to keep a promise visible until o
 The public repository contains:
 
 - a React proof interface that opens on the ownership risk;
-- CockroachDB-ready tables for commitment records, immutable events, and scoped memory;
+- live CockroachDB Cloud tables for commitment records, immutable events, and scoped memory;
 - a Node repository layer that refuses to fake persistence when `DATABASE_URL` is absent;
-- a deterministic policy shared by the local API and AWS Lambda handler;
+- a deterministic policy shared by the local API and deployment-ready AWS Lambda handler;
 - a guarded public-safe demo seed covering all three meaningful decisions;
 - a GitHub Actions gate that runs lint, production build, policy tests, schema verification, and seed verification on every push.
 
-The live integration evidence will use the official `ccloud` CLI to provision and inspect the CockroachDB Cloud cluster, the CockroachDB Cloud Managed MCP Server in read-only mode for health/schema/audit inspection, and AWS Lambda plus HTTP API for the bounded API path.
+The live evidence already includes the official `ccloud` CLI inspecting the CockroachDB Cloud cluster and the CockroachDB Cloud Managed MCP Server performing a read-only table/query inspection of the public-safe fixture. AWS Lambda plus HTTP API are ready in the repository and remain the final deployment proof before submission.
 
 ## Why CockroachDB and AWS
 
@@ -45,15 +45,16 @@ CockroachDB is the durable memory layer because promises need transactional owne
 - Repository: https://github.com/Peanuts1605/promise-ledger
 - Public verification workflow: https://github.com/Peanuts1605/promise-ledger/actions/runs/29742789794
 - Architecture: https://github.com/Peanuts1605/promise-ledger/blob/main/docs/ARCHITECTURE.md
+- Live CockroachDB and MCP receipt: https://github.com/Peanuts1605/promise-ledger/blob/main/docs/receipts/PROMISE_LEDGER_LIVE_COCKROACH_MCP_PROOF_RECEIPT_2026-07-20.md
 
 ## Evidence required before submission
 
-- [ ] Live CockroachDB Cloud cluster on AWS, created with `ccloud`.
-- [ ] `server/schema.sql` applied to the cluster.
-- [ ] Public-safe fixture replayed against the live cluster.
-- [ ] Read-only CockroachDB Managed MCP inspection captured.
+- [x] Live CockroachDB Cloud Basic cluster on AWS inspected with `ccloud`.
+- [x] `server/schema.sql` applied to the cluster.
+- [x] Public-safe fixture replayed against the live cluster.
+- [x] Read-only CockroachDB Managed MCP inspection captured.
 - [ ] AWS Lambda `/health`, record read, decision read, and owner assignment verified.
 - [ ] Public sub-three-minute demo video captures the working integration.
 - [ ] Devpost fields, terms, and eligibility complete.
 
-Until those boxes are checked, this draft deliberately makes no live cloud claim.
+Until the AWS Lambda, video, and Devpost boxes are checked, this draft deliberately does not claim a complete contest submission.

@@ -1,6 +1,6 @@
 # Promise Ledger Demo Run of Show
 
-Target length: 100 to 130 seconds after live CockroachDB and Lambda evidence exists.
+Target length: 100 to 130 seconds after the live AWS Lambda evidence exists.
 
 ## 0:00-0:12 - The risk
 
@@ -30,19 +30,19 @@ Click `Prepare follow-up`, then show the event and `READY FOR JORDAN TO REVIEW`.
 
 ## 1:08-1:35 - Live CockroachDB proof
 
-Show the authenticated CockroachDB Cloud cluster, the schema, and the public-safe `PL-DEMO-001` through `PL-DEMO-003` fixture outcomes. Show the `ccloud` command/result only after it is live.
+Show the authenticated CockroachDB Cloud cluster, the schema, and the public-safe `PL-DEMO-001` through `PL-DEMO-003` fixture outcomes. Show the successful `ccloud` cluster inspection and fixture verification result.
 
 > CockroachDB stores the promise, its ordered decision trail, and memory scoped to customer plus project. The demo fixture proves the three valid outcomes: assign an owner, hold for missing context, or prepare a review-only draft.
 
 ## 1:35-1:52 - Managed MCP proof
 
-Show a read-only CockroachDB Managed MCP health/schema or audit inspection only after it is live.
+Show the read-only CockroachDB Managed MCP table inspection and a public-safe query. Point out that its cluster-scoped configuration refuses a supplied `cluster_id`, preventing cross-cluster drift in the proof.
 
 > The Managed MCP surface is read-only in this proof. It lets the agent inspect the same durable memory state without treating a chat recap as truth.
 
 ## 1:52-2:08 - AWS proof and close
 
-Show the deployed Lambda HTTP API `/health`, one decision response, and the public repository action run.
+Show the deployed Lambda HTTP API `/health`, one decision response, and the public repository action run. This segment is not recordable until the AWS deployment passes.
 
 > AWS Lambda serves the small API path. The public repository has a verification gate, and every demo record is invented. Promise Ledger proves one simple idea: agent memory is useful when it can keep a promise.
 
@@ -51,4 +51,4 @@ Show the deployed Lambda HTTP API `/health`, one decision response, and the publ
 - Use the default `OWNER REQUIRED` state first; it is the clearest product tension.
 - Keep the record key, source, owner, decision, scoped memory reason, and no-send state readable.
 - Do not record real customer or account data.
-- Do not claim cloud, MCP, or Lambda before their live evidence is on screen.
+- Do not claim the AWS application-service requirement before the deployed Lambda evidence is on screen.
