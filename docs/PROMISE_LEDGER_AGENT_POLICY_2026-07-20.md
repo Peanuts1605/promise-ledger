@@ -19,7 +19,8 @@ The memory layer is not merely retrieval. It changes what the agent is permitted
 
 - The policy is implemented in `server/agent.mjs`.
 - The API and Lambda expose the policy at `GET /api/promises/{externalKey}/decision` once a live CockroachDB connection is configured.
-- Eight local tests pass, including all three decision branches.
+- Ten local tests pass, including all three decision branches, route separation,
+  and public-safe seed coverage.
 - The UI makes the active recommendation visible before the action buttons.
 
 ## Non-claim

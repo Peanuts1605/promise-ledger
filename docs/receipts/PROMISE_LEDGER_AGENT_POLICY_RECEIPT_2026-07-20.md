@@ -25,6 +25,12 @@ Status: fully shared local proof passed
 - `npm test`: 8 passing tests
 - Browser render: the first viewport visibly shows `Agent recommendation: ASSIGN OWNER` and has no horizontal overflow.
 
+## Subsequent regression coverage
+
+The original policy proof ran with 8 tests. The current repository has 10
+passing tests after adding decision-route separation and public-safe seed
+coverage; this strengthens the same policy without changing its decision rules.
+
 ## Shared proof
 
 - Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-AGENT-POLICY/`
