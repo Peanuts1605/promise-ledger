@@ -24,7 +24,7 @@ The packet separates already-verified local proof from remaining live contest in
 - `npm test`: 10 passing tests
 - `npm run db:verify-schema`: passed
 - `npm run db:verify-demo-seed`: passed
-- Public GitHub Actions workflow: passing on the prior reconciliation commit; the packet commit has been pushed and is awaiting its own run result.
+- Public GitHub Actions workflow: passed on the current workflow-runtime commit at https://github.com/Peanuts1605/promise-ledger/actions/runs/29743420386
 
 ## Shared proof
 
