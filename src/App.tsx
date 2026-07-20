@@ -46,6 +46,7 @@ function App() {
   const [events, setEvents] = useState<LedgerEvent[]>(initialEvents)
   const [reminderSet, setReminderSet] = useState(false)
   const [draftReady, setDraftReady] = useState(false)
+  const [reviewOpen, setReviewOpen] = useState(false)
   const [notice, setNotice] = useState('')
 
   const status = owner ? 'OWNER CONFIRMED' : 'OWNER REQUIRED'
@@ -74,8 +75,17 @@ function App() {
   }
 
   function reassignOwner() {
-    setOwner('Jordan Kim')
-    setNotice('Owner reassignment is recorded in the ledger.')
+    const nextOwner = owner === 'Jordan Kim' ? 'Maya Chen' : 'Jordan Kim'
+    setOwner(nextOwner)
+    setDraftReady(false)
+    setReviewOpen(false)
+    appendEvent({
+      kind: 'assigned',
+      title: `Owner reassigned: ${nextOwner}`,
+      detail: `The next customer-facing decision now belongs to ${nextOwner}; any prior draft must be prepared again for review.`,
+      time: 'Today, 10:05 AM',
+    })
+    setNotice(`${nextOwner} is now accountable. The prior draft returned to review preparation.`)
   }
 
   function setReminder() {
@@ -145,7 +155,7 @@ function App() {
       <section className="action-band" aria-label="Next action">
         <div>
           <span className="action-kicker">Next move</span>
-          <strong>{owner ? `Jordan is accountable for the permit answer.` : 'Name the person who will keep this promise.'}</strong>
+          <strong>{owner ? `${owner} is accountable for the permit answer.` : 'Name the person who will keep this promise.'}</strong>
         </div>
         {!owner ? (
           <button className="button primary" onClick={assignOwner}><UserRound size={17} />Assign Jordan Kim</button>
@@ -174,8 +184,8 @@ function App() {
           <div className="section-heading"><div><p className="eyebrow">Accountability</p><h2>Owner record</h2></div><CircleUserRound size={20} /></div>
           {owner ? (
             <>
-              <div className="owner-person"><span className="avatar">JK</span><div><strong>Jordan Kim</strong><span>Permits and partner operations</span></div><span className="confirmed"><Check size={14} />Confirmed</span></div>
-              <p>Jordan can review the facts, confirm the permit state, and decide whether Evelyn needs a status update before Wednesday.</p>
+              <div className="owner-person"><span className="avatar">{owner === 'Jordan Kim' ? 'JK' : 'MC'}</span><div><strong>{owner}</strong><span>Permits and partner operations</span></div><span className="confirmed"><Check size={14} />Confirmed</span></div>
+              <p>{owner} can review the facts, confirm the permit state, and decide whether Evelyn needs a status update before Wednesday.</p>
               <button className="text-button" onClick={reassignOwner}>Change owner <ArrowUpRight size={15} /></button>
             </>
           ) : (
@@ -212,10 +222,10 @@ function App() {
         <article className={`draft-card ${draftReady ? 'ready' : ''}`}>
           <div className="section-heading"><div><p className="eyebrow">Review, never auto-send</p><h2>Customer follow-up</h2></div><Send size={20} /></div>
           {draftReady ? <>
-            <div className="draft-status"><CheckCircle2 size={16} /> READY FOR JORDAN TO REVIEW</div>
+            <div className="draft-status"><CheckCircle2 size={16} /> READY FOR {owner?.toUpperCase()} TO REVIEW</div>
             <p className="draft-copy">Hi Evelyn, I am confirming the Patio Permit status now. I will send the decision by Wednesday morning so you have clarity for the August 16 event.</p>
             <div className="draft-meta"><span>Uses 1 matching memory</span><span>Not sent</span></div>
-            <button className="button secondary wide"><FileText size={17} />Open review draft</button>
+            <button className="button secondary wide" onClick={() => setReviewOpen(true)}><FileText size={17} />Open review draft</button>
           </> : <>
             <div className="draft-placeholder"><Send size={24} /></div>
             <h3>Prepare the next message only after ownership is clear.</h3>
@@ -224,6 +234,19 @@ function App() {
           </>}
         </article>
       </section>
+
+      {reviewOpen && draftReady && <div className="review-overlay" role="presentation">
+        <section className="review-dialog" role="dialog" aria-modal="true" aria-labelledby="review-title">
+          <div className="review-dialog-heading">
+            <div><p className="eyebrow">Owner review</p><h2 id="review-title">Check the draft before anyone sends it.</h2></div>
+            <button className="dialog-close" onClick={() => setReviewOpen(false)} aria-label="Close review draft">x</button>
+          </div>
+          <p className="review-owner">Prepared for <strong>{owner}</strong>. This draft is not sent.</p>
+          <blockquote>{'"'}Hi Evelyn, I am confirming the Patio Permit status now. I will send the decision by Wednesday morning so you have clarity for the August 16 event.{'"'}</blockquote>
+          <div className="review-evidence"><ShieldCheck size={16} /><span>Grounded in one matching customer-and-project memory. Unrelated notes are excluded.</span></div>
+          <button className="button primary" onClick={() => setReviewOpen(false)}><Check size={17} />Close review</button>
+        </section>
+      </div>}
 
       <footer><span>Promise Ledger prototype</span><span>Public-safe demo data only</span><span>Decision record: ownership -&gt; evidence -&gt; next move</span></footer>
     </main>
