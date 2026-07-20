@@ -11,7 +11,9 @@
     "api": "node server/index.mjs",
     "db:verify-schema": "node scripts/verify-schema.mjs",
     "db:verify-demo-seed": "node scripts/verify-demo-seed.mjs",
+    "db:apply-schema": "node server/apply-schema.mjs",
     "db:seed-demo": "node server/seed-demo.mjs",
+    "db:verify-live-demo": "node server/verify-live-fixture.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

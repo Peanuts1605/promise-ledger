@@ -24,8 +24,13 @@ npm test
 When a CockroachDB Cloud cluster is available, set `DATABASE_URL`, apply the schema through CockroachDB tooling, seed only public-safe demo data, and run:
 
 ```bash
+ALLOW_SCHEMA_APPLY=true npm run db:apply-schema
+ALLOW_PUBLIC_SAFE_SEED=true npm run db:seed-demo
+npm run db:verify-live-demo
 npm run api
 curl http://127.0.0.1:8787/health
 ```
+
+`db:verify-live-demo` confirms that the live database returns the same three public-safe outcomes as the local contract: assign owner, hold for missing scoped context, and prepare a review-only draft.
 
 The frontend currently remains an explicit local proof slice until that live connection is verified.

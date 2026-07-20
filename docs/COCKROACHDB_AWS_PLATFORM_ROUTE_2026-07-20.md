@@ -33,8 +33,8 @@ The current local repository, SQL schema, Lambda handler, and SAM template are i
 1. Complete `ccloud auth login` and verify with `ccloud auth whoami`.
 2. Create a **no-spend** CockroachDB Basic cluster on AWS through `ccloud`.
 3. Create the least-privileged demo SQL user and retain the connection string only in 1Password and deployment configuration.
-4. Apply `server/schema.sql` and seed public-safe Promise Ledger fixture records.
-5. Run the repository against the live cluster and prove an owner assignment/event transaction.
+4. Run `ALLOW_SCHEMA_APPLY=true npm run db:apply-schema` and `ALLOW_PUBLIC_SAFE_SEED=true npm run db:seed-demo` against the public-safe cluster.
+5. Run `npm run db:verify-live-demo` to prove the cluster returns all three policy outcomes with ordered events and customer-plus-project scoped memory.
 6. Add the managed CockroachDB MCP configuration from the Cloud Console in read-only mode and record the schema/health inspection.
 7. Deploy the Lambda template only after the AWS account has an explicit no-spend path, then prove `/health` and one API transaction.
 8. Record each claim with a screenshot, command receipt, and public-safe video evidence.
