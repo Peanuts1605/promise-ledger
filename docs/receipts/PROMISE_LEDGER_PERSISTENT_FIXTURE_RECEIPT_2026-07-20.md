@@ -34,9 +34,9 @@ No CockroachDB Cloud cluster, Managed MCP server, or AWS Lambda deployment is cl
 
 ## Shared proof
 
-- Drive mirror: pending
-- Notion pointer: pending
-- Reconciled receipt: pending
+- Drive mirror: `TMN_NAUMIO_HQ/06_DELIVERY/PL-20260720-PERSISTENT-FIXTURE/`
+- Notion pointer: https://app.notion.com/p/3a3b143d2917811f8869cf25ab64d3f8
+- Reconciled receipt: this receipt was patched after the Drive mirror and Notion pointer were verified; its reconciled copy is re-mirrored with the delivery bundle.
 
 ## Next smallest patch
 
