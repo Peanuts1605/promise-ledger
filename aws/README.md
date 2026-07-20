@@ -2,7 +2,7 @@
 
 Promise Ledger's intended AWS service is **AWS Lambda** behind an HTTP API. The Lambda handler has the same storage behavior as the local API: it needs `DATABASE_URL` and returns a visible configuration status rather than using a hidden fallback.
 
-`template.yaml` uses a currently supported `nodejs22.x` Lambda runtime and an ARM64 function shape. It is intentionally not deployed yet; no AWS account, credentials, or CockroachDB cluster has been configured for this proof.
+`template.yaml` uses a currently supported `nodejs22.x` Lambda runtime and an ARM64 function shape. The CockroachDB Cloud public-safe fixture is already live and verified. AWS CLI/SAM validation is also complete; deployment into an authenticated AWS account remains the final live-service gate.
 
 ## Pre-deploy verification
 
@@ -12,10 +12,22 @@ npm run build
 sam validate --template aws/template.yaml
 ```
 
-## Later deployment
+## Deployment after AWS authentication
 
-1. Create a CockroachDB Cloud cluster through the authorized `ccloud` route.
-2. Store its connection string only in the deployment environment.
-3. Apply `server/schema.sql` with public-safe demo data.
-4. Validate the Lambda health route and the promise owner route.
-5. Record deployment URL and evidence before claiming the AWS integration is live.
+Supply the already verified CockroachDB connection string through an approved
+secret-injection environment, then run:
+
+```bash
+npm run aws:deploy
+```
+
+The command refuses to run without both an authenticated AWS CLI session and
+`DATABASE_URL`. It deploys the SAM stack, discovers the API output, and verifies
+three public-safe facts without printing the database URL:
+
+1. `/health` confirms CockroachDB persistence.
+2. `PL-DEMO-001` can be read with its immutable event trail.
+3. `PL-DEMO-003` returns `PREPARE_REVIEW_DRAFT` from the deployed decision route.
+
+Record the endpoint and verification output before claiming the AWS integration
+is live.
